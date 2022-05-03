@@ -49,6 +49,8 @@ module.exports = gql`
         movie(id: ID!): Movie!
         user(username: String!): User
         users: [User!]!
+        countries: [Country]
+        genres: [Genre]
         me: User!
         movieFeed(order_by: String, order: String, cursor: String): MovieFeed
         moviesByCountry(country: String!, cursor: String): MovieFeed

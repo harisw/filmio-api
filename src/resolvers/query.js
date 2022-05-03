@@ -11,19 +11,26 @@ module.exports = {
     users: async (parent, args, { models}) => {
         return await models.User.find({});
     },
+    countries: async (parent, args, { models}) => {
+        return await models.Country.find({});
+    },
+    genres: async (parent, args, {models}) => {
+        return await models.Genre.find({});
+    },
     me: async (parent, args, { models, user}) => {
         return await models.User.findById(user.id);
     },
-    movieFeed: async (parent, { cursor }, { models}) => {
+    movieFeed: async (parent, { order_by, order, cursor }, { models}) => {
         const limit = 10;
         let hasNextPage = false;
-
         let cursorQuery = {};
-
         if(cursor) {
             cursorQuery = { _id: {$lt: cursor} };
         }
-
+        if(order_by) {
+            cursorQuery = {...cursorQuery,
+            }
+        }
         let movies = await models.Movie.find(cursorQuery)
         .sort({_id: -1})
         .limit(limit +1);
