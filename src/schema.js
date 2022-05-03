@@ -29,6 +29,16 @@ module.exports = gql`
         movies: [Movie!]!
         favorites: [Movie!]!
     }
+    type Country {
+        id: ID!
+        name: String!
+        slug: String!
+    }
+    type Genre {
+        id: ID!
+        name: String!
+        slug: String!
+    }
     type MovieFeed {
         movies: [Movie]!
         cursor: String!
@@ -40,7 +50,8 @@ module.exports = gql`
         user(username: String!): User
         users: [User!]!
         me: User!
-        movieFeed(cursor: String): MovieFeed
+        movieFeed(order_by: String, order: String, cursor: String): MovieFeed
+        moviesByCountry(country: String!, cursor: String): MovieFeed
     }
     type Mutation {
         signUp(username: String!, email: String!, password: String!): String!
